@@ -14,7 +14,7 @@ The goals / steps of this project are the following:
 * Warp the detected lane boundaries back onto the original image.
 * Output visual display of the lane boundaries and numerical estimation of lane curvature and vehicle position.
 
-CAMERA CALIBRATION AND DISTORTION CORRECTION
+### CAMERA CALIBRATION AND DISTORTION CORRECTION
 
 The transform of 3D object in the real world to a 2D image is'nt perfect. We have to correct the image distortion because it changes the apprance size, or shape of an object and more importantly it make object appear closer or father away than they atually are.
 
@@ -23,7 +23,7 @@ A chessboard can be use because its regular high contrast pattern makes it easy 
 
 I have made a chessboard class specifically for this. It tales a path to a chessboard iamges, and the number of chessborad corners in each rows and collumns it expects to detect(in this case  9 and 6 respectively). It use the opencv functions find chessboardCorner() and drawchessboardCorners(). For each of the twenty chessbaord images provided in camera_cal folder, We can get the corner(if possible), and give a set of points(object points) that map the corner points coordinates to the theoreticle corrdinate ( for example (0, 0, 0), _(0, 1, 0), (8,5,0)). So we can get the camera calibration paremeter( distrotions_coefficients, camera_calibration_matrix) that we can use to undistort an image. We use a build-in calibrateCamera() funtion of open cv for this. We feed this parameters to build in openCV undistort() funtion to get the corrected image.
 
-GETTING THE “SKY VIEW” WITH PERSPECTIVE_TRANSFORM 
+### GETTING THE “SKY VIEW” WITH PERSPECTIVE_TRANSFORM 
 
 Given an undistorted image of the vehilce perspective(vehicle view), we can wrap this image to output an image of another perspective such as a bird's eye view from the sky(sky_view) given a trasformation matrix. We can derive transformation matrix( wrap matrix) by giving the pixel corrdinates of points of the input image of one perspective( source_points) and the corresponding pixels coordinates of the output perspective (destination points) using the function getPerspectivetransform().We also can get the inverse_warp_matrix to get from "sky_view" to "vehicle_view" by switching the places of the source and destination points fed into the funtion getPerspectivetransform().
 
@@ -31,5 +31,5 @@ To get the source_points and destination points, we get an image in vehilce_view
 
 A BirdsEye specifically for this. It take in source_points, destiantion_points, the camera_calibration_matrix and distortion_coefficients. You can use its undistort() function to output and undistorted image thata makes use of the camera_calibration_matrix and distortions_coefficients. 
 
-FILTERING LANE PIXELS: GRADIENT AND COLOR THRESHOLDING  
+### FILTERING LANE PIXELS: GRADIENT AND COLOR THRESHOLDING  
 
